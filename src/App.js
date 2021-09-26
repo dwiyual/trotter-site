@@ -1,13 +1,14 @@
 import React from 'react';
 import './App.css';
-import {Nav, Title} from './components';
+import {Nav, Title, About} from './components'
 
 
 function App() 
 {
   return(
-    <><Nav /><Title /></>
-  )
+    <><><Nav />
+      <Title /></><About /></>  )
 }
+
 
 export default App;

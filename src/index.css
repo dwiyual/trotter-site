@@ -12,4 +12,25 @@ code {
     monospace;
 }
 
+#nav {
+  background-color: linear-gradient( rgb(7, 7, 7), rgb(22, 22, 22)) ;
+  margin: 5%;
+  display: flex;
+  justify-content: space-between;
+}
 
+#title {
+  color: blue;
+  margin: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#about_us {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  height: 60%;
+}
