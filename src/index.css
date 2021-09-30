@@ -13,14 +13,16 @@ code {
 }
 
 #nav {
-  background-color: linear-gradient( rgb(7, 7, 7), rgb(22, 22, 22)) ;
+  color: #F9F9F9;
   margin: 5%;
   display: flex;
   justify-content: space-between;
+  font-size: large;
+  padding: 1%;
 }
 
-#title {
-  color: blue;
+#Title {
+  color:#116772;
   margin: 5%;
   display: flex;
   justify-content: center;
@@ -29,8 +31,16 @@ code {
 
 #about_us {
   margin: auto;
+  background: linear-gradient(#116772,#39315B);
+  color: #F9F9F9;
+  margin: 10%;
+  padding: 10%;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, .5),
+              -10px -10px 100px rgb(255, 255, 255);
+  border-radius: 5%;
+  font-size: 1.5rem;
+  width: 60%;
+  height: 20%;
   display: flex;
   justify-content: center;
-  width: 80%;
-  height: 60%;
 }
