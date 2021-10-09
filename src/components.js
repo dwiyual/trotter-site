@@ -1,16 +1,21 @@
 import React from "react";
 import "./index.css";
-import {BrowserRouter, Link} from 'react-router-dom';
+import {BrowserRouter, Link,Route} from 'react-router-dom';
 
 export class Nav extends
     React.Component {
     render() {
         return (
+            <nav id ="nav" className="nav">
             <BrowserRouter>
-                <Link to="/Home">Home</Link>
+                <Link to="/home">Home</Link>
                 <Link to="/about_us">About</Link>
                 <Link to="/services">Services</Link>
+                <Route path="/home" component="Home"></Route>
+                <Route path="/about_us" component={About}></Route>
+                <Route path="/Services" component={Services}></Route>
             </BrowserRouter>
+            </nav>
 
         );
     }
@@ -49,5 +54,13 @@ export class Nav extends
                     </article>
                 </div>
                 );
+    }
+}
+
+export class Services extends React.Component {
+    render(){
+        return(
+            <h1>hey</h1>
+        );
     }
 }
