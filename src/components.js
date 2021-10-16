@@ -6,18 +6,18 @@ export class Nav extends
     React.Component {
     render() {
         return (
-            <nav id ="nav" className="nav">
             <BrowserRouter>
-                <Link to="/home">Home</Link>
-                <Link to="/about_us">About</Link>
-                <Link to="/services">Services</Link>
-                <Link to="/application">Application</Link>
-                <Route path="/home" component="Home"></Route>
-                <Route path="/about_us" component={About}></Route>
-                <Route path="/Services" component={Services}></Route>
-                <Route path="/applicaton" Component={Application}></Route>
+                 <nav id ="nav" className="nav">
+                   <Link to="/home">Home</Link>
+                    <Link to="/about_us">About</Link>
+                    <Link to="/services">Services</Link>
+                    <Link to="/application">Application</Link>
+                    <Route exact path="/home" component="Home"></Route>
+                    <Route exact path="/about_us" component={About}></Route>
+                    <Route exact path="/Services" component={Services}></Route>
+                    <Route exact path="/applicaton" Component={Application}></Route>
+                </nav>
             </BrowserRouter>
-            </nav>
 
         );
     }
@@ -68,22 +68,36 @@ export class Services extends React.Component {
 }
 
 export class Application extends React.Component {
+    constructor(){
+        super();
+        this.state = {};
+    }
+
+    handleChange = event => {
+        this.setState({...this.state, [event.target.name]: event.target.value})
+    }
     render(){
         return(
             <div>
                 <form>
                     <label>
                         First Name:
-                        <input type = "text" name = "firstname"/>
+                        <input type = "text" 
+                        name = "firstname"
+                        onChange ={event => this.handleChange(event)}/>
                         
                     </label>
                     <label>
                         Last Name:
-                        <input type = "text" name = "lastname"/>
+                        <input type = "text" 
+                        name = "lastname"
+                        onChange ={event => this.handleChange(event)}/>
                     </label>
                     <label>
                         address
-                        <input type = "text" name = "address"/>
+                        <input type = "text" 
+                        name = "address"
+                        onChange ={event => this.handleChange(event)}/>
                     </label> 
                 </form>
             </div>

@@ -6,9 +6,13 @@ import { Nav, Title, About, Application } from './components';
 
 function App() {
   return (
-    <><><><Nav />
-      <Title />
-    </><About /></><Application /></>)
+    <>
+    <Nav></Nav>
+    <Title></Title>
+    <About></About>
+    <Application></Application>
+    </>
+  )
 }
 
 
