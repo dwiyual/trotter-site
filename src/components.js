@@ -12,10 +12,12 @@ export class Nav extends
                     <Link to="/about_us">About</Link>
                     <Link to="/services">Services</Link>
                     <Link to="/application">Application</Link>
-                    <Route exact path="/home" component="Home"></Route>
-                    <Route exact path="/about_us" component={About}></Route>
-                    <Route exact path="/Services" component={Services}></Route>
-                    <Route exact path="/applicaton" Component={Application}></Route>
+                    <switch>
+                        <Route exact path="/home" component="Home"></Route>
+                        <Route exact path="/about_us" component={About}></Route>
+                        <Route exact path="/Services" component={Services}></Route>
+                        <Route exact path="/applicaton" Component={Application}></Route>
+                    </switch>
                 </nav>
             </BrowserRouter>
 
@@ -76,10 +78,16 @@ export class Application extends React.Component {
     handleChange = event => {
         this.setState({...this.state, [event.target.name]: event.target.value})
     }
+
+    handleSubimit = event => {
+        event.preventDefault();
+        console.log(this.state);
+    }
     render(){
         return(
             <div>
-                <form>
+                <form 
+                onSubmit ={event => this.handleSubimit(event)}>
                     <label>
                         First Name:
                         <input type = "text" 
@@ -98,7 +106,8 @@ export class Application extends React.Component {
                         <input type = "text" 
                         name = "address"
                         onChange ={event => this.handleChange(event)}/>
-                    </label> 
+                    </label>
+                    <button>Submit</button>
                 </form>
             </div>
         );
