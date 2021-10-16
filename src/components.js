@@ -11,9 +11,11 @@ export class Nav extends
                 <Link to="/home">Home</Link>
                 <Link to="/about_us">About</Link>
                 <Link to="/services">Services</Link>
+                <Link to="/application">Application</Link>
                 <Route path="/home" component="Home"></Route>
                 <Route path="/about_us" component={About}></Route>
                 <Route path="/Services" component={Services}></Route>
+                <Route path="/applicaton" Component={Application}></Route>
             </BrowserRouter>
             </nav>
 
@@ -61,6 +63,30 @@ export class Services extends React.Component {
     render(){
         return(
             <h1>hey</h1>
+        );
+    }
+}
+
+export class Application extends React.Component {
+    render(){
+        return(
+            <div>
+                <form>
+                    <label>
+                        First Name:
+                        <input type = "text" name = "firstname"/>
+                        
+                    </label>
+                    <label>
+                        Last Name:
+                        <input type = "text" name = "lastname"/>
+                    </label>
+                    <label>
+                        address
+                        <input type = "text" name = "address"/>
+                    </label> 
+                </form>
+            </div>
         );
     }
 }

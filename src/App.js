@@ -1,14 +1,14 @@
 import React from 'react';
 import './App.css';
-import { Nav, Title, About } from './components';
+import { Nav, Title, About, Application } from './components';
 
 
 
 function App() {
   return (
-    <><><Nav />
+    <><><><Nav />
       <Title />
-      </><About /></>)
+    </><About /></><Application /></>)
 }
 
 
