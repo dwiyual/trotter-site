@@ -1,19 +1,18 @@
+
 import React from 'react';
 import './App.css';
-import { Nav, Title, About, Application } from './components';
-import 
-
-
+import { About, Application, Home, Services } from './components';
 
 function App() {
+
   return (
     <>
-    <Nav></Nav>
-    <Title></Title>
-    <About></About>
-    <Application></Application>
+      <Home></Home>
+      <About></About>
+      <Services></Services>
+      <Application></Application>
     </>
-  )
+  );
 }
 
 
