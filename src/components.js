@@ -1,6 +1,7 @@
 import React from "react";
 import "./index.css";
 import { BrowserRouter, Link, Route } from 'react-router-dom';
+import {Carousel} from "reactstrap";
 
 export class Nav extends
     React.Component {
@@ -75,7 +76,9 @@ export class About extends
 export class Services extends React.Component {
     render() {
         return (
-            <h1>hey</h1>
+            <><>
+            <Carousel></Carousel>
+            </></>
         );
     }
 }
