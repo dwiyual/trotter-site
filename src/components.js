@@ -1,13 +1,12 @@
 import React from "react";
 import "./index.css";
-import { BrowserRouter, Link, Route } from 'react-router-dom';
+import {  Link, Route } from 'react-router-dom';
 import {Carousel} from "reactstrap";
 
 export class Nav extends
     React.Component {
     render() {
         return (
-            <BrowserRouter>
                 <nav id="nav" className="nav">
                     <Link to="/">Home</Link>
                     <Link to= "/about_us">About</Link>
@@ -19,8 +18,6 @@ export class Nav extends
                     <Route path="/services" component={Services} />
                     <Route path="/applicaton" Component={Application} />
                 </nav>
-            </BrowserRouter>
-
         );
     }
 }
