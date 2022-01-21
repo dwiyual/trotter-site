@@ -18,7 +18,14 @@ export class Home extends
   React.Component {
   render() {
     return (
-      <h1>Welcome to Trotter Floor Cleaning</h1>
+      <>
+        <main>
+          <h1>Welcome to Trotter Floor Cleaning</h1>
+          <nav>
+            <Link to="/about">About</Link>
+          </nav>
+        </main>
+      </>
     );
   }
 }
@@ -26,7 +33,12 @@ export class Home extends
 export class About extends React.Component {
   render() {
     return (
-      <h1>We Clean many types of comercial buildings.</h1>
+      <main>
+        <h1>We Clean many types of comercial buildings.</h1>
+        <nav>
+          <Link to="/">Home</Link>
+        </nav>
+      </main>
     )
   }
 
