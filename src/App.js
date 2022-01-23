@@ -67,6 +67,20 @@ export class Application extends React.Component {
           <label>
             First Name 
             <input type="text"/>
+            Last Name 
+            <input type="text"/>
+          </label>
+          <label>
+            Adress
+            <input type="text"/>
+          </label>
+          <label>
+            Date of Birth
+            <input type="date"/>
+          </label>
+          <label>
+            Phone Number
+            <input type="number"/>
           </label>
         </form>
       </div>
