@@ -1,17 +1,21 @@
 import * as React from "react";
-import { Routes, Route, Link } from "react-router-dom"
+import { Routes, Route, Link } from "react-router-dom";
+import {Button} from "reactstrap";
 import "./App.css";
+import "./index.css";
 export function App() {
   return (
     <div className="App">
+      <nav className="link">
+        <Link to="/">Home</Link>
+        <Link to="about">About</Link>
+        <Link to="apply">Apply</Link>
+      </nav>
       <h1>Welcome to Trotter Floor Cleaning!</h1>
-      <Link to = "/">Home</Link>
-      <Link to = "about">About</Link>
-      <Link to = "apply">Apply</Link>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path ="apply" element={<Application/>}/>
+        <Route  path="about" element={<About />} />
+        <Route  path ="apply" element={<Application/>}/>
       </Routes>
     </div>
   );
@@ -24,9 +28,6 @@ export class Home extends
       <>
         <main>
           <h1>Hello</h1>
-          <nav className="link">
-            <Link to="/about">About</Link>
-          </nav>
         </main>
       </>
     );
@@ -38,10 +39,6 @@ export class About extends React.Component {
     return (
       <>
         <main className="content" id="about-content">
-          <nav className="link">
-            <Link to="/">Home</Link>
-            <Link to="apply">Apply</Link>
-          </nav>
           <h1>Our Story</h1>
           <p>Trotter Floor Cleaning Service is a small, family owned bussiness out of Lincoln, NE. We have been
             doing buisness
@@ -65,12 +62,15 @@ export class Application extends React.Component {
   render(){
     return(
       <main>
-      <nav>
-        <Link to = "/">Home</Link>
-        <Link to = "about">About</Link>
-
-      </nav>
-      <h1>Apply Today!</h1>
+      <div className="application-form">
+        <form>
+          <label>
+            First Name 
+            <input type="text"/>
+          </label>
+        </form>
+      </div>
+      <Button color="primary">Apply here</Button>
       </main>
     );
   }
