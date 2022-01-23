@@ -8,4 +8,5 @@
 
 .application-form {
     display: flex;
+    align-items: stretch;
 }

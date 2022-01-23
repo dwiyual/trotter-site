@@ -1,23 +1,50 @@
 import * as React from "react";
 import { Routes, Route, Link } from "react-router-dom";
-import {Button} from "reactstrap";
-import "./App.css";
-import "./index.css";
+import styled from "styled-components";
+import Application from "./components/application";
+
+const StyledNav = styled.nav`
+color: whitesmoke;
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin: 5%;
+`
+
+const StyledDiv = styled.div`
+width: 50vw;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(#116772,#39315B);
+  color: #F9F9F9;
+  margin: auto;
+  padding: 2%;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, .5),
+              -10px -10px 100px rgb(255, 255, 255);
+  border-radius: 5%;
+  font-size: 1.5rem;
+`
+
 export function App() {
   return (
-    <div className="App">
-      <nav className="link">
+    <>
+      <StyledNav>
         <Link to="/">Home</Link>
         <Link to="about">About</Link>
         <Link to="apply">Apply</Link>
-      </nav>
+      </StyledNav>
       <h1>Welcome to Trotter Floor Cleaning!</h1>
+      <StyledDiv>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route  path="about" element={<About />} />
         <Route  path ="apply" element={<Application/>}/>
       </Routes>
-    </div>
+      </StyledDiv>
+      </>
   );
 }
 
@@ -58,34 +85,3 @@ export class About extends React.Component {
   }
 }
 
-export class Application extends React.Component {
-  render(){
-    return(
-      <main>
-      <div className="application-form">
-        <form>
-          <label>
-            First Name 
-            <input type="text"/>
-            Last Name 
-            <input type="text"/>
-          </label>
-          <label>
-            Adress
-            <input type="text"/>
-          </label>
-          <label>
-            Date of Birth
-            <input type="date"/>
-          </label>
-          <label>
-            Phone Number
-            <input type="number"/>
-          </label>
-        </form>
-      </div>
-      <Button color="primary">Apply here</Button>
-      </main>
-    );
-  }
-}
