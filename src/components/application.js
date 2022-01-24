@@ -24,14 +24,17 @@ class Application extends React.Component {
                 Last Name
                 <input type="text" />
               </label>
+              <br/>
               <label>
                 Adress
                 <input type="text" />
               </label>
+              <br/>
               <label>
                 Date of Birth
                 <input type="date" />
               </label>
+              <br/>
               <label>
                 Phone Number
                 <input type="text" />
