@@ -7,6 +7,7 @@ display: flex;
 justify-content: space-between;
 align-items: center;
 flex-direction: column;
+height: 20rem;
 `
 class Application extends React.Component {
   constructor() {
