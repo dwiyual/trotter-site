@@ -20,8 +20,8 @@ class Application extends React.Component {
     };
   }
       handleChange = Event => {
-        this.setState({firstName: Event.target.value})
-        console.log(this.state.firstName)
+        this.setState({...this.state, [Event.target.name]: Event.target.value})
+        console.log(this.state)
       }
   render() {
     return (
@@ -32,23 +32,23 @@ class Application extends React.Component {
                 First Name
                 <input onChange={this.handleChange} type="text" name="firstName" />
                 Last Name
-                <input type="text" name="lastName"  />
+                <input onChange={this.handleChange} type="text" name="lastName"  />
               </label>
               <br/>
               <label>
                 Adress
-                <input type="text" name="adress" />
+                <input onChange={this.handleChange} type="text" name="adress" />
               </label>
               <br/>
               <label>
                 Date of Birth
-                <input type="date" name="birthDate"
+                <input onChange={this.handleChange} type="date" name="birthDate"
                  />
               </label>
               <br/>
               <label>
                 Phone Number
-                <input type="text" name="phoneNumber" />
+                <input onChange={this.handleChange} type="text" name="phoneNumber" />
               </label>
             </form>
         </FormWrapper>
