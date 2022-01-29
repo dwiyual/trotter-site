@@ -5,11 +5,12 @@ import Application from "./components/application";
 import About from "./components/About";
 
 export const StyledNav = styled.nav`
-color: whitesmoke;
+color: #116772;
 display: flex;
 justify-content: space-between;
 align-items: center;
 margin: 2.5%;
+text-decoration: none;
 `
 const StyledDiv = styled.div`
 width: 50vw;

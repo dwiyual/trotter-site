@@ -1,11 +1,18 @@
 import * as React from "react";
+import styled from "styled-components";
+
+const StyledH2 = styled.h2`
+display: flex;
+align-items: center;
+justify-content: center;
+`
 
 class About extends React.Component {
     render() {
       return (
         <>
           <main className="content" id="about-content">
-            <h1>Our Story</h1>
+            <StyledH2>Our Story</StyledH2>
             <p>Trotter Floor Cleaning Service is a small, family owned bussiness out of Lincoln, NE. We have been
               doing buisness
               for over 50 years. Started in 1964 by Merlyn Trotter, originally doing only floors, we have since
