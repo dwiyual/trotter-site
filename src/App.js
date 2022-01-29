@@ -6,11 +6,19 @@ import About from "./components/About";
 
 export const StyledNav = styled.nav`
 color: #116772;
+background-color: #116772;
 display: flex;
-justify-content: space-between;
+justify-content: space-around;
 align-items: center;
-margin: 2.5%;
-text-decoration: none;
+margin: .5%;
+padding: .5%;
+height: 10%;
+width: 100vw;
+box-sizing: border-box;
+  :hover {
+    color: whitesmoke;
+  }
+
 `
 const StyledDiv = styled.div`
 width: 50vw;
@@ -35,15 +43,25 @@ align-items: center;
 justify-content: center;
 color: #116772;
 `
+const StyledA = styled.a`
+color: whitesmoke;
+text-decoration: none;
+`
 
 
 export function App() {
   return (
     <>
       <StyledNav>
-        <Link to="/">Home</Link>
-        <Link to="about">About</Link>
-        <Link to="apply">Apply</Link>
+        <Link to="/">
+          <StyledA>Home</StyledA>
+        </Link>
+        <Link to="about">
+            <StyledA>About</StyledA>
+          </Link>
+        <Link to="apply">
+            <StyledA>Apply</StyledA>
+        </Link>
       </StyledNav>
       <StyledHeader>Welcome to Trotter Floor Cleaning!</StyledHeader>
       <StyledDiv>
