@@ -45,7 +45,7 @@ color: #116772;
 `
 const StyledA = styled.a`
 color: whitesmoke;
-text-decoration: none;
+text-decoration::none;
 `
 
 

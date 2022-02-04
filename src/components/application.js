@@ -4,10 +4,11 @@ import styled from "styled-components";
 
 const FormWrapper = styled.div`
 display: flex;
-justify-content: space-between;
-align-items: center;
+justify-content: space-around
+align-items: space-around;
 flex-direction: column;
 height: 20rem;
+margin: 1%;
 `
 class Application extends React.Component {
   constructor() {
@@ -28,10 +29,18 @@ class Application extends React.Component {
         handleSubmit = Event => {
           Event.preventDefault();
           alert("Your application has been sent!");
+      
+      this.setState({ 
+      firstName: "",
+      lastName: "",
+      adress: "",
+      birthDate: "",
+      phoneNumber: ""});
         }
   render() {
     return (
       <>
+      <h2>Apply Today</h2>
         <FormWrapper>
             <form>
               <label>
@@ -42,19 +51,17 @@ class Application extends React.Component {
               </label>
               <br/>
               <label>
-                Adress
-                <input onChange={this.handleChange} type="text" name="adress" value={this.state.adress} />
+                 Adress
+                 <input onChange={this.handleChange} type="text" name="adress" value={this.state.adress} />
               </label>
-              <br/>
               <label>
-                Date of Birth
-                <input onChange={this.handleChange} type="date" name="birthDate" value={this.state.birthDate}
-                 />
+              Date of Birth
+                <input onChange={this.handleChange} type="date" name="birthDate" value={this.state.birthDate}/>
               </label>
               <br/>
               <label>
                 Phone Number
-                <input onChange={this.handleChange} type="text" name="phoneNumber" value={this.state.phoneNumber} />
+                <input onChange={this.handleChange} type="tel" name="phoneNumber" value={this.state.phoneNumber} />
               </label>
             </form>
         </FormWrapper>
