@@ -1,14 +1,21 @@
 import { Button } from "reactstrap";
 import * as React from "react";
 import styled from "styled-components";
+import * as Yup from "yup";
 
-const FormWrapper = styled.div`
-display: flex;
-justify-content: space-around
-align-items: space-around;
-flex-direction: column;
+const FormSchema = Yup.object().shape({
+  firstName: Yup
+      .string()
+      .require("Must have a first name."),
+  lastName: Yup
+      .string()
+      .required("Must have a last name.")
+})
+
+const FormWrapper = styled.form`
+display: block;
 height: 20rem;
-margin: 1%;
+margin: 1rem;
 `
 class Application extends React.Component {
   constructor() {
@@ -16,6 +23,7 @@ class Application extends React.Component {
     this.state = {
       firstName: "",
       lastName: "",
+      email: "",
       adress: "",
       birthDate: "",
       phoneNumber: ""
@@ -29,20 +37,13 @@ class Application extends React.Component {
         handleSubmit = Event => {
           Event.preventDefault();
           alert("Your application has been sent!");
-      
-      this.setState({ 
-      firstName: "",
-      lastName: "",
-      adress: "",
-      birthDate: "",
-      phoneNumber: ""});
+          this.setState({...this.state,[Event.target.name]: ""});
         }
   render() {
     return (
       <>
       <h2>Apply Today</h2>
         <FormWrapper>
-            <form>
               <label>
                 First Name
                 <input onChange={this.handleChange} type="text" name="firstName" value={this.state.firstName} />
@@ -54,6 +55,10 @@ class Application extends React.Component {
                  Adress
                  <input onChange={this.handleChange} type="text" name="adress" value={this.state.adress} />
               </label>
+              <label >
+                Email
+                  <input onChange={this.handleChange} typeof="email" name = " email" value = {this.state.email}/>
+              </label>
               <label>
               Date of Birth
                 <input onChange={this.handleChange} type="date" name="birthDate" value={this.state.birthDate}/>
@@ -63,7 +68,6 @@ class Application extends React.Component {
                 Phone Number
                 <input onChange={this.handleChange} type="tel" name="phoneNumber" value={this.state.phoneNumber} />
               </label>
-            </form>
         </FormWrapper>
         <Button onClick={this.handleSubmit} color="primary">Submit</Button>
       </>
