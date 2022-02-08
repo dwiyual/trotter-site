@@ -18,7 +18,7 @@ display: block;
 height: 20rem;
 margin: 1rem;
 `
-function Application() {
+export function Application() {
   const [form, setForm] = useState({
     firstName: '',
     lastName: '',
@@ -27,6 +27,17 @@ function Application() {
     birthDate: '',
     phoneNumber: ''
   });
+
+  const [errors, setErrors] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    adress: '',
+    birthDate: '',
+    phoneNumber: ''
+
+  });
+
   const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
@@ -37,13 +48,13 @@ function Application() {
   }, [form]);
 
 
-  const handleChange = event => {
-    setForm({ ...form, [event.target.name]: event.target.value })
+  const handleChange = e => {
+    setForm({ ...form, [e.target.name]: e.target.value })
     console.log(form)
   }
 
-  const handleSubmit = event => {
-    event.preventDefault();
+  const handleSubmit = e => {
+    e.preventDefault();
     alert("Your application has been sent!");
     setForm({
       firstName: '',
@@ -53,41 +64,69 @@ function Application() {
       birthDate: '',
       phoneNumber: ''
     });
-  }
-  return (
-    <>
-      <h2>Apply Today</h2>
-      <FormWrapper>
-        <label>
-          First Name
-          <input onChange={handleChange} type="text" name="firstName" value={form.firstName} />
-          Last Name
-          <input onChange={handleChange} type="text" name="lastName" value={form.lastName} />
-        </label>
-        <br />
-        <label>
-          Adress
-          <input onChange={handleChange} type="text" name="adress" value={form.adress} />
-        </label>
-        <label >
-          Email
-          <input onChange={handleChange} type="email" name="email" value={form.email} />
-        </label>
-        <label>
-          Date of Birth
-          <input onChange={handleChange} type="date" name="birthDate" value={form.birthDate} />
-        </label>
-        <br />
-        <label>
-          Phone Number
-          <input onChange={handleChange} type="tel" name="phoneNumber" value={form.phoneNumber} />
-        </label>
-        <Button disabled={disabled} onSubmit={handleSubmit} >Submit</Button>
-      </FormWrapper>
-    </>
 
-  );
+  
+
+    Yup
+      .reach(formSchema, e.targe.name)
+      //we can then run validate using the value
+      .validate(e.target.value)
+      // if the validation is successful, we can clear the error message
+      .then(valid => {
+        setErrors({
+          ...errors, [e.target.name]: ""
+        });
+      })
+      // if the validation is unsuccessful, we can set the error message to the message
+      // returned from yup (that we created in our schema)
+      .catch(err => {
+        setErrors({
+          ...errors, [e.target.name]: err.errors[0]
+        });
+      });
+
+    // Whether or not our validation was successful, we will still set the state to the new value as the user is typing
+    setForm({
+      ...form, [e.target.name]: e.target.value
+    });
+  };
+
+
 }
+return (
+  <>
+    <h2>Apply Today</h2>
+    <FormWrapper>
+      <label>
+        First Name
+        <input onChange={handleChange()} type="text" name="firstName" value={form.firstName} />
+        Last Name
+        <input onChange={handleChange()} type="text" name="lastName" value={form.lastName} />
+      </label>
+      <br />
+      <label>
+        Adress
+        <input onChange={handleChange()} type="text" name="adress" value={form.adress} />
+      </label>
+      <label >
+        Email
+        <input onChange={handleChange()} type="email" name="email" value={form.email} />
+      </label>
+      <label>
+        Date of Birth
+        <input onChange={handleChange()} type="date" name="birthDate" value={form.birthDate} />
+      </label>
+      <br />
+      <label>
+        Phone Number
+        <input onChange={handleChange()} type="tel" name="phoneNumber" value={form.phoneNumber} />
+      </label>
+      <Button disabled={disabled} onSubmit={handleSubmit()} >Submit</Button>
+    </FormWrapper>
+  </>
+
+);
+
 
 
 export default Application
