@@ -1,17 +1,17 @@
 import { Button } from "reactstrap";
 import * as React from "react";
 import styled from "styled-components";
-import { useState } from "react";
-//import * as Yup from "yup";
+import { useState, useEffect } from "react";
+import * as Yup from "yup";
 
-//const FormSchema = Yup.object().shape({
-//firstName: Yup
-//  .string()
-//  .require("Must have a first name."),
-// lastName: Yup
-//  .string()
-//  .required("Must have a last name.")
-//})
+const formSchema = Yup.object().shape({
+  firstName: Yup.string().require("Must have a first name!"),
+  lastName: Yup.string().required("Must have a last name!"),
+  email: Yup.string().email("must be valid email!"),
+  adress: Yup.string().required("must have adress!"),
+  birthDate: Yup.date().required("birth date required!"),
+  phoneNumber: Yup.number().max(10, "Phone number is too long!")
+});
 
 const FormWrapper = styled.form`
 display: block;
@@ -27,7 +27,14 @@ function Application() {
     birthDate: '',
     phoneNumber: ''
   });
+  const [disabled, setDisabled] = useState(true);
 
+  useEffect(() => {
+
+    formSchema.isValid(form).then(valid => {
+      setDisabled(!valid);
+    });
+  }, [form]);
 
 
   const handleChange = event => {
@@ -38,7 +45,14 @@ function Application() {
   const handleSubmit = event => {
     event.preventDefault();
     alert("Your application has been sent!");
-    setForm({ ...form, [event.target.name]: "" });
+    setForm({
+      firstName: '',
+      lastName: '',
+      email: '',
+      adress: '',
+      birthDate: '',
+      phoneNumber: ''
+    });
   }
   return (
     <>
@@ -57,7 +71,7 @@ function Application() {
         </label>
         <label >
           Email
-          <input onChange={handleChange} type="email" name=" email" value={form.email} />
+          <input onChange={handleChange} type="email" name="email" value={form.email} />
         </label>
         <label>
           Date of Birth
@@ -68,10 +82,10 @@ function Application() {
           Phone Number
           <input onChange={handleChange} type="tel" name="phoneNumber" value={form.phoneNumber} />
         </label>
-        <Button onClick={handleSubmit}>Submit</Button>
+        <Button disabled={disabled} onSubmit={handleSubmit} >Submit</Button>
       </FormWrapper>
     </>
-   
+
   );
 }
 
