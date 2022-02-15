@@ -1,5 +1,5 @@
-import { Button } from "reactstrap";
 import * as React from "react";
+import { Button } from "reactstrap";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import * as Yup from "yup";
@@ -65,7 +65,7 @@ export function Application() {
       phoneNumber: ''
     });
 
-  
+
 
     Yup
       .reach(formSchema, e.targe.name)
@@ -90,42 +90,41 @@ export function Application() {
       ...form, [e.target.name]: e.target.value
     });
   };
+  return (
+    <>
+      <h2>Apply Today</h2>
+      <FormWrapper>
+        <label>
+          First Name
+          <input onChange={handleChange()} type="text" name="firstName" value={form.firstName} />
+          Last Name
+          <input onChange={handleChange()} type="text" name="lastName" value={form.lastName} />
+        </label>
+        <br />
+        <label>
+          Adress
+          <input onChange={handleChange()} type="text" name="adress" value={form.adress} />
+        </label>
+        <label >
+          Email
+          <input onChange={handleChange()} type="email" name="email" value={form.email} />
+        </label>
+        <label>
+          Date of Birth
+          <input onChange={handleChange()} type="date" name="birthDate" value={form.birthDate} />
+        </label>
+        <br />
+        <label>
+          Phone Number
+          <input onChange={handleChange()} type="tel" name="phoneNumber" value={form.phoneNumber} />
+        </label>
+        <Button disabled={disabled} onSubmit={handleSubmit()} >Submit</Button>
+      </FormWrapper>
+    </>
 
+  );
 
 }
-return (
-  <>
-    <h2>Apply Today</h2>
-    <FormWrapper>
-      <label>
-        First Name
-        <input onChange={handleChange()} type="text" name="firstName" value={form.firstName} />
-        Last Name
-        <input onChange={handleChange()} type="text" name="lastName" value={form.lastName} />
-      </label>
-      <br />
-      <label>
-        Adress
-        <input onChange={handleChange()} type="text" name="adress" value={form.adress} />
-      </label>
-      <label >
-        Email
-        <input onChange={handleChange()} type="email" name="email" value={form.email} />
-      </label>
-      <label>
-        Date of Birth
-        <input onChange={handleChange()} type="date" name="birthDate" value={form.birthDate} />
-      </label>
-      <br />
-      <label>
-        Phone Number
-        <input onChange={handleChange()} type="tel" name="phoneNumber" value={form.phoneNumber} />
-      </label>
-      <Button disabled={disabled} onSubmit={handleSubmit()} >Submit</Button>
-    </FormWrapper>
-  </>
-
-);
 
 
 
