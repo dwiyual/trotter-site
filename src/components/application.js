@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import * as Yup from "yup";
 
 const formSchema = Yup.object().shape({
-  firstName: Yup.string().require("Must have a first name!"),
+  firstName: Yup.string().required("Must have a first name!"),
   lastName: Yup.string().required("Must have a last name!"),
   email: Yup.string().email("must be valid email!"),
   adress: Yup.string().required("must have adress!"),
