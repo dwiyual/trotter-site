@@ -40,75 +40,70 @@ function Application() {
 
   const [disabled, setDisabled] = useState(true);
 
-  const setFormError= (name, value) => {
+  const setFormError = (name, value) => {
     Yup.reach(formSchema, name).validate(value)
-      .then(() => setErrors({...errors, [name]: ''}))
-      .catche(err => setErrors({...errors, [name]: err.errors[0]}))
+      .then(() => setErrors({ ...errors, [name]: '' }))
+      .catche(err => setErrors({ ...errors, [name]: err.errors[0] }))
   }
 
   const handleChange = e => {
-    const [name, type, value, checked ] = e.target;
-    const valueToUse = type === 'checkbox'? checked : value;
-    setFormError(name, valueToUse)
-    setForm({...form, [name]: value})
-    console.log(form)
+    const [name, type, value, checked] = e.target;
+    const valueToUse = type === 'checkbox' ? checked : value;
+    setFormError(name, valueToUse);
+    setForm({ ...form, [name]: value });
   }
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    alert("Your application has been sent!");
-    setForm({
-      firstName: '',
-      lastName: '',
-      email: '',
-      adress: '',
-      birthDate: '',
-      phoneNumber: ''
-    });
-  }
 
-  useEffect(() => {
-    formSchema.isValid(form).then(valid => {
-      setDisabled(!valid);
-    });
-  }, [form]);
+    const handleSubmit = e => {
+      e.preventDefault();
+      alert("Your application has been sent!");
+      setForm({
+        firstName: '',
+        lastName: '',
+        email: '',
+        adress: '',
+        birthDate: '',
+        phoneNumber: ''
+      });
+    }
 
-  
-  
+    useEffect(() => {
+      formSchema.isValid(form).then(valid => {
+        setDisabled(!valid);
+      });
+    }, [form]);
 
- 
-  
-  return (
-  <>
-    <h2>Apply Today</h2>
-    <FormWrapper>
-      <label>
-        First Name
-        <input onChange={handleChange()} type="text" name="firstName" value={form.firstName} />
-        Last Name
-        <input onChange={handleChange()} type="text" name="lastName" value={form.lastName} />
-      </label>
-      <br />
-      <label>
-        Adress
-        <input onChange={handleChange()} type="text" name="adress" value={form.adress} />
-      </label>
-      <label >
-        Email
-        <input onChange={handleChange()} type="email" name="email" value={form.email} />
-      </label>
-      <label>
-        Date of Birth
-        <input onChange={handleChange()} type="date" name="birthDate" value={form.birthDate} />
-      </label>
-      <br />
-      <label>
-        Phone Number
-        <input onChange={handleChange()} type="tel" name="phoneNumber" value={form.phoneNumber} />
-      </label>
-      <Button disabled={disabled} onSubmit={handleSubmit()} >Submit</Button>
-    </FormWrapper>
-  </>);
+    return (
+    <>
+      <h2>Apply Today</h2>
+      <FormWrapper>
+        <label>
+          First Name
+          <input onChange={handleChange} type="text" name="firstName" value={form.firstName} />
+          Last Name
+          <input onChange={handleChange} type="text" name="lastName" value={form.lastName} />
+        </label>
+        <br />
+        <label>
+          Adress
+          <input onChange={handleChange} type="text" name="adress" value={form.adress} />
+        </label>
+        <label >
+          Email
+          <input onChange={handleChange} type="email" name="email" value={form.email} />
+        </label>
+        <label>
+          Date of Birth
+          <input onChange={handleChange} type="date" name="birthDate" value={form.birthDate} />
+        </label>
+        <br />
+        <label>
+          Phone Number
+          <input onChange={handleChange} type="tel" name="phoneNumber" value={form.phoneNumber} />
+        </label>
+        <Button disabled={disabled} onSubmit={handleSubmit} >Submit</Button>
+      </FormWrapper>
+    </>);
 }
 
 
