@@ -46,15 +46,15 @@ function Application() {
       .catche(err => setErrors({ ...errors, [name]: err.errors[0] }))
   }
 
-  const handleChange = e => {
-    const [name, type, value, checked] = e.target;
-    const valueToUse = type === 'checkbox' ? checked : value;
-    setFormError(name, valueToUse);
-    setForm({ ...form, [name]: value });
+  const handleChange = (e) => {
+  
+    setForm({ ...form, [e.target.name]: e.target.value });
+
+    console.log(form);
   }
 
 
-    const handleSubmit = e => {
+    const handleSubmit = (e) => {
       e.preventDefault();
       alert("Your application has been sent!");
       setForm({
