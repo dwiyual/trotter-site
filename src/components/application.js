@@ -8,9 +8,9 @@ const formSchema = Yup.object().shape({
   firstName: Yup.string().required("Must have a first name!"),
   lastName: Yup.string().required("Must have a last name!"),
   email: Yup.string().email("must be valid email!"),
-  adress: Yup.string().required("must have adress!"),
+  adress: Yup.string(),
   birthDate: Yup.date().required("birth date required!"),
-  phoneNumber: Yup.number().max(10, "Phone number is too long!")
+  phoneNumber: Yup.number().min(10, "Phone number is too long!")
 });
 
 const FormWrapper = styled.form`
@@ -91,6 +91,8 @@ function Application() {
         <label>
           First Name
           <input onChange={handleChange} type="text" name="firstName" value={form.firstName} />
+          </label>
+          <label>
           Last Name
           <input onChange={handleChange} type="text" name="lastName" value={form.lastName} />
         </label>
