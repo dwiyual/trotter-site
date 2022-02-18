@@ -40,40 +40,51 @@ function Application() {
 
   const [disabled, setDisabled] = useState(true);
 
-  const setFormError = (name, value) => {
-    Yup.reach(formSchema, name).validate(value)
-      .then(() => setErrors({ ...errors, [name]: '' }))
-      .catche(err => setErrors({ ...errors, [name]: err.errors[0] }))
-  }
+
 
   const handleChange = (e) => {
-  
-    setForm({ ...form, [e.target.name]: e.target.value });
-
+    Yup
+      .reach(formSchema, e.target.name)
+      //we can then run validate using the value
+      .validate(e.target.value)
+      // if the validation is successful, we can clear the error message
+      .then(valid => {
+        setErrors({
+          ...errors, [e.target.name]: ""
+        });
+      })
+      // if the validation is unsuccessful, we can set the error message to the message
+      // returned from yup (that we created in our schema)
+      .catch(err => {
+        setErrors({
+          ...errors, [e.target.name]: err.errors[0]
+        });
+      });
+      setForm({...form, [e.target.name]: e.target.value});
     console.log(form);
   }
 
 
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      alert("Your application has been sent!");
-      setForm({
-        firstName: '',
-        lastName: '',
-        email: '',
-        adress: '',
-        birthDate: '',
-        phoneNumber: ''
-      });
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert("Your application has been sent!");
+    setForm({
+      firstName: '',
+      lastName: '',
+      email: '',
+      adress: '',
+      birthDate: '',
+      phoneNumber: ''
+    });
+  }
 
-    useEffect(() => {
-      formSchema.isValid(form).then(valid => {
-        setDisabled(!valid);
-      });
-    }, [form]);
+  useEffect(() => {
+    formSchema.isValid(form).then(valid => {
+      setDisabled(!valid);
+    });
+  }, [form]);
 
-    return (
+  return (
     <>
       <h2>Apply Today</h2>
       <FormWrapper>

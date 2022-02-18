@@ -4,7 +4,8 @@ import styled from "styled-components";
 import Application from "./components/application";
 import About from "./components/About";
 
-export const StyledNav = styled.nav`
+
+export const StyledNav = styled.nav`, 
 color: #116772;
 background-color: #116772;
 display: flex;
@@ -83,6 +84,7 @@ export class Home extends
         <main>
           <h1>Hello</h1>
         </main>
+        
       </>
     );
   }
