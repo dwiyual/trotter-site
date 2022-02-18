@@ -94,15 +94,19 @@ function Application() {
           Last Name
           <input onChange={handleChange} type="text" name="lastName" value={form.lastName} />
         </label>
+        { errors.firstName.length > 0 && <p className="error">{errors.firstName}</p> }
+        { errors.lastName.length > 0 && <p className="error">{errors.lastName}</p> }
         <br />
         <label>
           Adress
           <input onChange={handleChange} type="text" name="adress" value={form.adress} />
         </label>
+        { errors.adress.length > 0 && <p className="error">{errors.adress}</p> }
         <label >
           Email
           <input onChange={handleChange} type="email" name="email" value={form.email} />
         </label>
+        { errors.email.length > 0 && <p className="error">{errors.email}</p> }
         <label>
           Date of Birth
           <input onChange={handleChange} type="date" name="birthDate" value={form.birthDate} />
