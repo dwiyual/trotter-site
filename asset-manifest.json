@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.js": "/trotter-site/static/js/main.570fdbff.js",
+    "static/js/787.4295969f.chunk.js": "/trotter-site/static/js/787.4295969f.chunk.js",
+    "index.html": "/trotter-site/index.html",
+    "main.570fdbff.js.map": "/trotter-site/static/js/main.570fdbff.js.map",
+    "787.4295969f.chunk.js.map": "/trotter-site/static/js/787.4295969f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.570fdbff.js"
+  ]
+}
