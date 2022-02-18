@@ -66,7 +66,7 @@ function Application() {
 
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefualt();
     alert("Your application has been sent!");
     setForm({
       firstName: '',
