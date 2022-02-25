@@ -44,7 +44,7 @@ align-items: center;
 justify-content: center;
 color: #116772;
 `
-const StyledA = styled.li`
+const StyledA = styled.a`
 color: whitesmoke;
 text-decoration:none;
 `
