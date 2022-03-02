@@ -1,8 +1,9 @@
 import * as React from "react";
 import { Button } from "reactstrap";
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import * as Yup from "yup";
+import formReducer from "../Reducers/formreducer";
 
 const formSchema = Yup.object().shape({
   firstName: Yup.string().required("Must have a first name!"),
@@ -19,14 +20,17 @@ height: 20rem;
 margin: 1rem;
 `
 function Application() {
-  const [form, setForm] = useState({
+  const initialState = {
     firstName: '',
     lastName: '',
     email: '',
     adress: '',
     birthDate: '',
     phoneNumber: ''
-  });
+  };
+
+  const [state, dispatch] = useReducer(initialState, formReducer);
+
 
   const [errors, setErrors] = useState({
     firstName: '',
@@ -60,8 +64,8 @@ function Application() {
           ...errors, [e.target.name]: err.errors[0]
         });
       });
-      setForm({...form, [e.target.name]: e.target.value});
-    console.log(form);
+      dispatch({type:"SET_STATE", payload: e.target.value});
+    console.log(state);
   }
 
 
@@ -79,7 +83,7 @@ function Application() {
   }
 
   useEffect(() => {
-    formSchema.isValid(form).then(valid => {
+    formSchema.isValid(state.then(valid => {
       setDisabled(!valid);
     });
   }, [form]);
@@ -90,33 +94,33 @@ function Application() {
       <FormWrapper>
         <label>
           First Name
-          <input onChange={handleChange} type="text" name="firstName" value={form.firstName} />
+          <input onChange={dispatch({type:"SET_FIRSTNAME", payload: Event.target.value})} type="text" name="firstName" value={form.firstName} />
           </label>
           <label>
           Last Name
-          <input onChange={handleChange} type="text" name="lastName" value={form.lastName} />
+          <input onChange={dispatch({type:"SET_LASTNAME", payload: Event.target.value})} type="text" name="lastName" value={form.lastName} />
         </label>
         { errors.firstName.length > 0 && <p className="error">{errors.firstName}</p> }
         { errors.lastName.length > 0 && <p className="error">{errors.lastName}</p> }
         <br />
         <label>
           Adress
-          <input onChange={handleChange} type="text" name="adress" value={form.adress} />
+          <input onChange={dispatch({type:"SET_ADRESS", payload: Event.target.value})} type="text" name="adress" value={form.adress} />
         </label>
         { errors.adress.length > 0 && <p className="error">{errors.adress}</p> }
         <label >
           Email
-          <input onChange={handleChange} type="email" name="email" value={form.email} />
+          <input onChange={dispatch({})} type="email" name="email" value={form.email} />
         </label>
         { errors.email.length > 0 && <p className="error">{errors.email}</p> }
         <label>
           Date of Birth
-          <input onChange={handleChange} type="date" name="birthDate" value={form.birthDate} />
+          <input onChange={dispatch({type:"SET_BIRTHDATE", payload: Event.target.value})} type="date" name="birthDate" value={form.birthDate} />
         </label>
         <br />
         <label>
           Phone Number
-          <input onChange={handleChange} type="tel" name="phoneNumber" value={form.phoneNumber} />
+          <input onChange={dispatch({type:"SET_PHONENUMBER", payload: Event.target.value})} type="tel" name="phoneNumber" value={form.phoneNumber} />
         </label>
         <Button disabled={disabled} onSubmit={handleSubmit} >Submit</Button>
       </FormWrapper>

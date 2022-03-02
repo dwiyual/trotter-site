@@ -1,5 +1,7 @@
-const formReducer = (state, action)=> {
+export const formReducer = (state, action)=> {
     {        switch (action.type) {
+            case "SET_STATE":
+                return {...state, ...action.payload}
             case "SET_FIRSTNAME":
                 return{...state, firstName: action.payload};
             case "SET_LASTNAME":
@@ -12,6 +14,10 @@ const formReducer = (state, action)=> {
                 return {...state, birthDate: action.payload};
             case "SET_PHONENUMBER":
                 return {...state, phoneNumber: action.payload};
+            default:
+                return state;
         }
     }
 }
+
+export default formReducer
