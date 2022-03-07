@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useState, useEffect, useReducer } from "react";
 import * as Yup from "yup";
 import formReducer from "../Reducers/formreducer";
+import { connect } from "react-redux";
 
 const formSchema = Yup.object().shape({
   firstName: Yup.string().required("Must have a first name!"),
@@ -19,6 +20,16 @@ display: block;
 height: 20rem;
 margin: 1rem;
 `
+const mapStatetoProps = (state) => {
+  return {
+    firstName: state.firstName,
+    lastName: state.lastName,
+    email: state.email,
+    adress: state.adress,
+    birthDate: state.birthDate,
+    phoneNumber: state.phoneNumber
+  }
+}
 function Application() {
   const initialState = {
     firstName: '',
@@ -64,7 +75,7 @@ function Application() {
           ...errors, [e.target.name]: err.errors[0]
         });
       });
-      dispatch({type:"SET_STATE", payload: e.target.value});
+    dispatch({ type: "SET_STATE", payload: e.target.value });
     console.log(state);
   }
 
@@ -72,21 +83,14 @@ function Application() {
   const handleSubmit = (e) => {
     e.preventDefualt();
     alert("Your application has been sent!");
-    setForm({
-      firstName: '',
-      lastName: '',
-      email: '',
-      adress: '',
-      birthDate: '',
-      phoneNumber: ''
-    });
+    dispatch({ type: 'SET_STATE' })
   }
 
   useEffect(() => {
     formSchema.isValid(state.then(valid => {
       setDisabled(!valid);
     });
-  }, [form]);
+  }, [state]);
 
   return (
     <>
@@ -94,33 +98,33 @@ function Application() {
       <FormWrapper>
         <label>
           First Name
-          <input onChange={dispatch({type:"SET_FIRSTNAME", payload: Event.target.value})} type="text" name="firstName" value={form.firstName} />
-          </label>
-          <label>
-          Last Name
-          <input onChange={dispatch({type:"SET_LASTNAME", payload: Event.target.value})} type="text" name="lastName" value={form.lastName} />
+          <input onChange={handleChange} />
         </label>
-        { errors.firstName.length > 0 && <p className="error">{errors.firstName}</p> }
-        { errors.lastName.length > 0 && <p className="error">{errors.lastName}</p> }
+        <label>
+          Last Name
+          <input onChange={handleChange} />
+        </label>
+        {errors.firstName.length > 0 && <p className="error">{errors.firstName}</p>}
+        {errors.lastName.length > 0 && <p className="error">{errors.lastName}</p>}
         <br />
         <label>
           Adress
-          <input onChange={dispatch({type:"SET_ADRESS", payload: Event.target.value})} type="text" name="adress" value={form.adress} />
+          <input onChange={handleChange} type="text" name="adress" value={form.adress} />
         </label>
-        { errors.adress.length > 0 && <p className="error">{errors.adress}</p> }
+        {errors.adress.length > 0 && <p className="error">{errors.adress}</p>}
         <label >
           Email
-          <input onChange={dispatch({})} type="email" name="email" value={form.email} />
+          <input onChange={handleChange} />
         </label>
-        { errors.email.length > 0 && <p className="error">{errors.email}</p> }
+        {errors.email.length > 0 && <p className="error">{errors.email}</p>}
         <label>
           Date of Birth
-          <input onChange={dispatch({type:"SET_BIRTHDATE", payload: Event.target.value})} type="date" name="birthDate" value={form.birthDate} />
+          <input onChange={handleChange)} type="date" name="birthDate" value={form.birthDate} />
         </label>
         <br />
         <label>
           Phone Number
-          <input onChange={dispatch({type:"SET_PHONENUMBER", payload: Event.target.value})} type="tel" name="phoneNumber" value={form.phoneNumber} />
+          <input onChange={dispatch({ type: "SET_PHONENUMBER", payload: Event.target.value })} type="tel" name="phoneNumber" value={form.phoneNumber} />
         </label>
         <Button disabled={disabled} onSubmit={handleSubmit} >Submit</Button>
       </FormWrapper>
@@ -129,4 +133,4 @@ function Application() {
 
 
 
-export default Application
+export default connect(mapStatetoProps, {})(Application)
