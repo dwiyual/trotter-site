@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useState, useEffect, useReducer } from "react";
 import * as Yup from "yup";
 import formReducer from "../Reducers/formreducer";
-import { connect } from "react-redux";
+
 
 const formSchema = Yup.object().shape({
   firstName: Yup.string().required("Must have a first name!"),
@@ -12,7 +12,7 @@ const formSchema = Yup.object().shape({
   email: Yup.string().email("must be valid email!"),
   adress: Yup.string(),
   birthDate: Yup.date().required("birth date required!"),
-  phoneNumber: Yup.number().min(10, "Phone number is too long!")
+  phoneNumber: Yup.number().max(10, "Phone number is too long!")
 });
 
 const FormWrapper = styled.form`
@@ -20,16 +20,7 @@ display: block;
 height: 20rem;
 margin: 1rem;
 `
-const mapStatetoProps = (state) => {
-  return {
-    firstName: state.firstName,
-    lastName: state.lastName,
-    email: state.email,
-    adress: state.adress,
-    birthDate: state.birthDate,
-    phoneNumber: state.phoneNumber
-  }
-}
+
 function Application() {
   const initialState = {
     firstName: '',
@@ -39,6 +30,8 @@ function Application() {
     birthDate: '',
     phoneNumber: ''
   };
+
+  const [form, setform] = useState(initialState)
 
   const [state, dispatch] = useReducer(initialState, formReducer);
 
@@ -74,63 +67,68 @@ function Application() {
         setErrors({
           ...errors, [e.target.name]: err.errors[0]
         });
+        console.log(errors);
       });
-    dispatch({ type: "SET_STATE", payload: e.target.value });
-    console.log(state);
+    setform({...form, [e.target.name]: e.target.value});
+    console.log(form)
   }
 
 
   const handleSubmit = (e) => {
     e.preventDefualt();
     alert("Your application has been sent!");
-    dispatch({ type: 'SET_STATE' })
+    setform({ [e.target.name]: '' });
+    console.log(form);
   }
-
   useEffect(() => {
-    formSchema.isValid(state.then(valid => {
+    /* We pass the entire state into the entire schema, no need to use reach here.
+    We want to make sure it is all valid before we allow a user to submit
+    isValid comes from Yup directly */
+    formSchema.isValid(form).then(valid => {
       setDisabled(!valid);
     });
-  }, [state]);
+  }, [form]);
 
   return (
-    <>
-      <h2>Apply Today</h2>
-      <FormWrapper>
-        <label>
-          First Name
-          <input onChange={handleChange} />
-        </label>
-        <label>
-          Last Name
-          <input onChange={handleChange} />
-        </label>
-        {errors.firstName.length > 0 && <p className="error">{errors.firstName}</p>}
-        {errors.lastName.length > 0 && <p className="error">{errors.lastName}</p>}
-        <br />
-        <label>
-          Adress
-          <input onChange={handleChange} type="text" name="adress" value={form.adress} />
-        </label>
-        {errors.adress.length > 0 && <p className="error">{errors.adress}</p>}
-        <label >
-          Email
-          <input onChange={handleChange} />
-        </label>
-        {errors.email.length > 0 && <p className="error">{errors.email}</p>}
-        <label>
-          Date of Birth
-          <input onChange={handleChange)} type="date" name="birthDate" value={form.birthDate} />
-        </label>
-        <br />
-        <label>
-          Phone Number
-          <input onChange={dispatch({ type: "SET_PHONENUMBER", payload: Event.target.value })} type="tel" name="phoneNumber" value={form.phoneNumber} />
-        </label>
-        <Button disabled={disabled} onSubmit={handleSubmit} >Submit</Button>
-      </FormWrapper>
-    </>);
-}
+      <>
+        <h2>Apply Today</h2>
+        <FormWrapper>
+          <label>
+            First Name
+            <input onChange={handleChange} />
+          </label>
+          <label>
+            Last Name
+            <input onChange={handleChange} />
+          </label>
+          {errors.firstName.length > 0 && <p className="error">{errors.firstName}</p>}
+          {errors.lastName.length > 0 && <p className="error">{errors.lastName}</p>}
+          <br />
+          <label>
+            Adress
+            <input onChange={handleChange} type="text" name="adress" value={form.adress} />
+          </label>
+          {errors.adress.length > 0 && <p className="error">{errors.adress}</p>}
+          <label >
+            Email
+            <input onChange={handleChange} />
+          </label>
+          {errors.email.length > 0 && <p className="error">{errors.email}</p>}
+          <label>
+            Date of Birth
+            <input onChange={handleChange} type="date" name="birthDate" value={form.birthDate} />
+          </label>
+          <br />
+          <label>
+            Phone Number
+            <input onChange={handleChange} type="tel" name="phoneNumber" value={form.phoneNumber} />
+          </label>
+          <Button disabled={disabled} onSubmit={handleSubmit} >Submit</Button>
+        </FormWrapper>
+      </>
+    );
+  }
 
 
 
-export default connect(mapStatetoProps, {})(Application)
+export default Application

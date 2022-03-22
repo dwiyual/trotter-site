@@ -5,6 +5,8 @@ import Application from "./components/application";
 import About from "./components/About";
 
 
+
+
 export const StyledNav = styled.nav`, 
 color: #116772;
 background-color: #116772;
