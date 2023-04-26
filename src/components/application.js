@@ -17,6 +17,7 @@ const formSchema = Yup.object().shape({
 
 const FormWrapper = styled.form`
 display: block;
+
 height: 20rem;
 margin: 1rem;
 `
@@ -33,7 +34,7 @@ function Application() {
 
   const [form, setform] = useState(initialState)
 
-  const [state, dispatch] = useReducer(initialState, formReducer);
+  //const [state, dispatch] = useReducer(initialState, formReducer);
 
 
   const [errors, setErrors] = useState({
@@ -54,7 +55,7 @@ function Application() {
     Yup
       .reach(formSchema, e.target.name)
       //we can then run validate using the value
-      .validate(e.target.value)
+      .isValid(e.target.value)
       // if the validation is successful, we can clear the error message
       .then(valid => {
         setErrors({
@@ -85,7 +86,7 @@ function Application() {
     We want to make sure it is all valid before we allow a user to submit
     isValid comes from Yup directly */
     formSchema.isValid(form).then(valid => {
-      setDisabled(!valid);
+      setDisabled(valid);
     });
   }, [form]);
 
