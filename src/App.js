@@ -46,7 +46,7 @@ align-items: center;
 justify-content: center;
 color: #116772;
 `
-const StyledA = styled.a`
+const Styledli = styled.ul`
 color: whitesmoke;
 text-decoration:none;
 `
@@ -57,24 +57,24 @@ export function App() {
     <>
       <StyledNav>
         <Link to="/">
-          <StyledA>Home</StyledA>
+          <Styledli>Home</Styledli>
         </Link>
         <Link to="about">
-            <StyledA>About</StyledA>
-          </Link>
+          <Styledli>About</Styledli>
+        </Link>
         <Link to="apply">
-            <StyledA>Apply</StyledA>
+          <Styledli>Apply</Styledli>
         </Link>
       </StyledNav>
       <StyledHeader>Welcome to Trotter Floor Cleaning!</StyledHeader>
       <StyledDiv>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route  path="about" element={<About />} />
-        <Route  path ="apply" element={<Application/>}/>
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="apply" element={<Application />} />
+        </Routes>
       </StyledDiv>
-      </>
+    </>
   );
 }
 
@@ -86,7 +86,7 @@ export class Home extends
         <main>
           <h1>Hello</h1>
         </main>
-        
+
       </>
     );
   }

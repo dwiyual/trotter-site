@@ -1,18 +1,17 @@
 import * as React from "react";
-import { Button } from "reactstrap";
 import styled from "styled-components";
-import { useState, useEffect, useReducer } from "react";
+import { useState, useEffect } from "react";
 import * as Yup from "yup";
-import formReducer from "../Reducers/formreducer";
+
 
 
 const formSchema = Yup.object().shape({
-  firstName: Yup.string().required("Must have a first name!"),
-  lastName: Yup.string().required("Must have a last name!"),
-  email: Yup.string().email("must be valid email!"),
+  firstName: Yup.string().required('Must have a first name!'),
+  lastName: Yup.string().required('Must have a last name!'),
+  email: Yup.string().email('must be valid email!'),
   adress: Yup.string(),
-  birthDate: Yup.date().required("birth date required!"),
-  phoneNumber: Yup.number().max(10, "Phone number is too long!")
+  birthDate: Yup.date().required('birth date required!'),
+  phoneNumber: Yup.number().max(10, 'Phone number is too long!')
 });
 
 const FormWrapper = styled.form`
@@ -50,29 +49,28 @@ function Application() {
   const [disabled, setDisabled] = useState(true);
 
 
-
   const handleChange = (e) => {
+    const fieldName = e.target.name;
+    const fieldValue = e.target.value;
+  
     Yup
-      .reach(formSchema, e.target.name)
-      //we can then run validate using the value
-      .isValid(e.target.value)
-      // if the validation is successful, we can clear the error message
+      .reach(formSchema, fieldName)
+      .validate(fieldValue)
       .then(valid => {
         setErrors({
-          ...errors, [e.target.name]: ""
+          ...errors, [fieldName]: ""
         });
       })
-      // if the validation is unsuccessful, we can set the error message to the message
-      // returned from yup (that we created in our schema)
       .catch(err => {
         setErrors({
-          ...errors, [e.target.name]: err.errors[0]
+          ...errors, [fieldName]: err.errors[0]
         });
-        console.log(errors);
       });
-    setform({...form, [e.target.name]: e.target.value});
+  
+    setform({ ...form, [fieldName]: fieldValue });  
     console.log(form)
-  }
+  };
+
 
 
   const handleSubmit = (e) => {
@@ -91,44 +89,44 @@ function Application() {
   }, [form]);
 
   return (
-      <>
-        <h2>Apply Today</h2>
-        <FormWrapper>
-          <label>
-            First Name
-            <input onChange={handleChange} />
-          </label>
-          <label>
-            Last Name
-            <input onChange={handleChange} />
-          </label>
-          {errors.firstName.length > 0 && <p className="error">{errors.firstName}</p>}
-          {errors.lastName.length > 0 && <p className="error">{errors.lastName}</p>}
-          <br />
-          <label>
-            Adress
-            <input onChange={handleChange} type="text" name="adress" value={form.adress} />
-          </label>
-          {errors.adress.length > 0 && <p className="error">{errors.adress}</p>}
-          <label >
-            Email
-            <input onChange={handleChange} />
-          </label>
-          {errors.email.length > 0 && <p className="error">{errors.email}</p>}
-          <label>
-            Date of Birth
-            <input onChange={handleChange} type="date" name="birthDate" value={form.birthDate} />
-          </label>
-          <br />
-          <label>
-            Phone Number
-            <input onChange={handleChange} type="tel" name="phoneNumber" value={form.phoneNumber} />
-          </label>
-          <Button disabled={disabled} onSubmit={handleSubmit} >Submit</Button>
-        </FormWrapper>
-      </>
-    );
-  }
+    <>
+      <h2>Apply Today</h2>
+      <FormWrapper>
+        <label className="apply-label">
+          First Name
+          <input onChange={handleChange} />
+        </label>
+        {errors.firstName.length > 0 && <p className="error">{errors.firstName}</p>}
+        <label className="apply-label">
+          Last Name
+          <input onChange={handleChange} />
+        </label>
+        {errors.lastName.length > 0 && <p className="error">{errors.lastName}</p>}
+        <br />
+        <label className="apply-label">
+          Adress
+          <input onChange={handleChange} type="text" name="adress" value={form.adress} />
+        </label>
+        {errors.adress.length > 0 && <p className="error">{errors.adress}</p>}
+        <label className="apply-label" >
+          Email
+          <input onChange={handleChange} />
+        </label>
+        {errors.email.length > 0 && <p className="error">{errors.email}</p>}
+        <label>
+          Date of Birth
+          <input onChange={handleChange} type="date" name="birthDate" value={form.birthDate} />
+        </label>
+        <br />
+        <label className="apply-label">
+          Phone Number
+          <input onChange={handleChange} type="tel" name="phoneNumber" value={form.phoneNumber} />
+        </label>
+        <button  type="submit" disabled={disabled} onSubmit={handleSubmit} >Submit</button>
+      </FormWrapper>
+    </>
+  );
+}
 
 
 
