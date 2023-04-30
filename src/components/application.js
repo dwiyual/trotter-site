@@ -22,31 +22,23 @@ height: 20rem;
 margin: 1rem;
 `
 
+const initialState = {
+    FirstName: '',
+    LastName: '',
+    Email: '',
+    Address: '',
+    BirthDate: '',
+    PhoneNumber: '',
+}
 
-function Application() {
+export function Application() {
 
-  const initialState = {
-    FirstName: "",
-    LastName: "",
-    Email: "",
-    Address: "",
-    BirthDate: "",
-    PhoneNumber: "",
-  };
-
-  const { FirstName, LastName, Email, Address, BirthDate, PhoneNumber } = useSelector(state => state.formReducer);
+  const { FirstName, LastName, Email, Address, BirthDate, PhoneNumber } = useSelector(state => state.FormReducer);
 
   const dispatch = useDispatch();
   const [form, setForm] = useState(initialState);
 
-  const [errors, setErrors] = useState({
-    FirstName: "",
-    LastName: "",
-    Email: "",
-    Address: "",
-    BirthDate: "",
-    PhoneNumber: "",
-  });
+  const [errors, setErrors] = useState(initialState);
 
   const [disabled, setDisabled] = useState(true);
 

@@ -3,12 +3,10 @@ import {  Route, Link, Routes } from "react-router-dom";
 import styled from "styled-components";
 import Application from "./components/application";
 import About from "./components/About";
-import App from "./App";
 
 
 
-
-export const StyledNav = styled.nav`, 
+const StyledNav = styled.nav`, 
 color: #116772;
 background-color: #116772;
 display: flex;
@@ -52,8 +50,7 @@ color: whitesmoke;
 text-decoration:none;
 `
 
-
-export function App() {
+ export function App() {
   return (
     <>
       <StyledNav>
@@ -70,7 +67,7 @@ export function App() {
       <StyledHeader>Welcome to Trotter Floor Cleaning!</StyledHeader>
       <StyledDiv>
         <Routes>
-          <Route path="/" element={<App />} />
+          <Route path="/" element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="apply" element={<Application />} />
         </Routes>
@@ -93,3 +90,5 @@ export class Home extends
     );
   }
 }
+
+export default App;
