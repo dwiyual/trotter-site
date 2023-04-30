@@ -2,9 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { FormReducer } from "../Reducers/formreducer";
 
 const store = configureStore({
-  reducer: {
-    FormReducer: FormReducer
-  }
+  reducer:  FormReducer 
 });
 
 export default store;

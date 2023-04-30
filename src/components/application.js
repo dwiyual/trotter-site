@@ -31,10 +31,15 @@ const initialState = {
     PhoneNumber: '',
 }
 
+
+
 export function Application() {
-
-  const { FirstName, LastName, Email, Address, BirthDate, PhoneNumber } = useSelector(state => state.FormReducer);
-
+  const FirstName = useSelector((state) => state.FirstName);
+  const LastName = useSelector((state) => state.LastName);
+  const Email = useSelector((state) => state.Email);
+  const Address = useSelector((state) => state.Address);
+  const BirthDate = useSelector((state) => state.BirthDate);
+  const PhoneNumber = useSelector((state) => state.PhoneNumber);
   const dispatch = useDispatch();
   const [form, setForm] = useState(initialState);
 
