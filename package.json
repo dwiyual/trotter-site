@@ -13,6 +13,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "react-redux": "^7.2.9",
     "react-router": "^6.2.1",
     "react-router-dom": "^6.2.1",
@@ -23,6 +24,8 @@
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
 =======
+=======
+>>>>>>> fa43958ebfc63ea2479e7f9de3dade44eb14dadf
     "react-router-dom": "^6.2.1",
     "react-scripts": "^5.0.0",
     "reactstrap": "^8.10.1",
