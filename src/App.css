@@ -20,3 +20,11 @@
   justify-content: space-evenly;
   color: whitesmoke;
 }
+
+.apply-label {
+  display: flex;
+  justify-content: space-evenly;
+  color: whitesmoke;
+  margin: 2%;
+  padding: auto;
+}

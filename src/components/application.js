@@ -10,9 +10,9 @@ const formSchema = Yup.object().shape({
   FirstName: Yup.string().required('Must have a first name!'),
   LastName: Yup.string().required('Must have a last name!'),
   Email: Yup.string().email('must be valid email!'),
-  Address: Yup.string(),
+  Address: Yup.string().required('must have an address!'),
   BirthDate: Yup.date().required('birth date required!'),
-  PhoneNumber: Yup.number().max(10, 'Phone number is too long!')
+  PhoneNumber: Yup.number().min(9, 'number is too short')
 });
 
 const FormWrapper = styled.form`
@@ -42,9 +42,7 @@ export function Application() {
   const PhoneNumber = useSelector((state) => state.PhoneNumber);
   const dispatch = useDispatch();
   const [form, setForm] = useState(initialState);
-
   const [errors, setErrors] = useState(initialState);
-
   const [disabled, setDisabled] = useState(true);
 
   const handleChange = (e) => {
@@ -114,7 +112,6 @@ export function Application() {
           <input onChange={handleChange} name="FirstName" value={FirstName} />
           {errors.FirstName && <p className="error">{errors.FirstName}</p>}
         </label>
-
         <label className="apply-label">
           Last Name
           <input onChange={handleChange} name="LastName" value={LastName} />
@@ -128,12 +125,14 @@ export function Application() {
 
           {errors.Address.length > 0 && <p className="error">{errors.Address}</p>}
         </label>
+        <br />
         <label className="apply-label" type="text" name="email" value={Email}>
           Email
           <input onChange={handleChange} />
 
           {errors.Email.length > 0 && <p className="error">{errors.Email}</p>}
         </label>
+        <br />
         <label className="apply-label">
           Date of Birth
           <input onChange={handleChange} type="date" name="BirthDate" value={BirthDate} />
