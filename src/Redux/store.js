@@ -3,5 +3,6 @@ import FormReducer from "../Reducers/formreducer";
 
 
 export default configureStore({
-    reducer: {FormReducer}
+    reducer: {
+        formReducer: FormReducer}
 });

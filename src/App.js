@@ -1,8 +1,9 @@
 import * as React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import {  Route, Link, Routes } from "react-router-dom";
 import styled from "styled-components";
 import Application from "./components/application";
 import About from "./components/About";
+import App from "./App";
 
 
 
@@ -69,10 +70,11 @@ export function App() {
       <StyledHeader>Welcome to Trotter Floor Cleaning!</StyledHeader>
       <StyledDiv>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<App />} />
           <Route path="about" element={<About />} />
           <Route path="apply" element={<Application />} />
         </Routes>
+      
       </StyledDiv>
     </>
   );

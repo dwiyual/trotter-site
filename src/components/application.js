@@ -2,16 +2,17 @@ import * as React from "react";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import * as Yup from "yup";
-
+import { useDispatch, useSelector } from "react-redux";
+import { setFirstName, setLastName, setEmail, setAddress, setBirthDate, setPhoneNumber } from "../Reducers/formreducer";
 
 
 const formSchema = Yup.object().shape({
-  firstName: Yup.string().required('Must have a first name!'),
-  lastName: Yup.string().required('Must have a last name!'),
-  email: Yup.string().email('must be valid email!'),
-  adress: Yup.string(),
-  birthDate: Yup.date().required('birth date required!'),
-  phoneNumber: Yup.number().max(10, 'Phone number is too long!')
+  FirstName: Yup.string().required('Must have a first name!'),
+  LastName: Yup.string().required('Must have a last name!'),
+  Email: Yup.string().email('must be valid email!'),
+  Address: Yup.string(),
+  BirthDate: Yup.date().required('birth date required!'),
+  PhoneNumber: Yup.number().max(10, 'Phone number is too long!')
 });
 
 const FormWrapper = styled.form`
@@ -21,38 +22,61 @@ height: 20rem;
 margin: 1rem;
 `
 
+
 function Application() {
+
   const initialState = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    adress: '',
-    birthDate: '',
-    phoneNumber: ''
+    FirstName: "",
+    LastName: "",
+    Email: "",
+    Address: "",
+    BirthDate: "",
+    PhoneNumber: "",
   };
 
-  const [form, setform] = useState(initialState)
+  const { FirstName, LastName, Email, Address, BirthDate, PhoneNumber } = useSelector(state => state.formReducer);
 
-  //const [state, dispatch] = useReducer(initialState, formReducer);
-
+  const dispatch = useDispatch();
+  const [form, setForm] = useState(initialState);
 
   const [errors, setErrors] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    adress: '',
-    birthDate: '',
-    phoneNumber: ''
-
+    FirstName: "",
+    LastName: "",
+    Email: "",
+    Address: "",
+    BirthDate: "",
+    PhoneNumber: "",
   });
 
   const [disabled, setDisabled] = useState(true);
 
-
   const handleChange = (e) => {
     const fieldName = e.target.name;
     const fieldValue = e.target.value;
-  
+
+    switch (fieldName) {
+      case 'FirstName':
+        dispatch(setFirstName(fieldValue));
+        break;
+      case 'LastName':
+        dispatch(setLastName(fieldValue));
+        break;
+      case 'Email':
+        dispatch(setEmail(fieldValue));
+        break;
+      case 'Address':
+        dispatch(setAddress(fieldValue));
+        break;
+      case 'BirthDate':
+        dispatch(setBirthDate(fieldValue));
+        break;
+      case 'PhoneNumber':
+        dispatch(setPhoneNumber(fieldValue));
+        break;
+      default:
+        break;
+    }
+
     Yup
       .reach(formSchema, fieldName)
       .validate(fieldValue)
@@ -66,25 +90,21 @@ function Application() {
           ...errors, [fieldName]: err.errors[0]
         });
       });
-  
-    setform({ ...form, [fieldName]: fieldValue });  
+
+    setForm({ ...form, [fieldName]: fieldValue });
     console.log(form)
   };
 
 
-
   const handleSubmit = (e) => {
-    e.preventDefualt();
+    e.preventDefault();
     alert("Your application has been sent!");
-    setform({ [e.target.name]: '' });
-    console.log(form);
-  }
+    setForm(initialState);
+  };
+
   useEffect(() => {
-    /* We pass the entire state into the entire schema, no need to use reach here.
-    We want to make sure it is all valid before we allow a user to submit
-    isValid comes from Yup directly */
-    formSchema.isValid(form).then(valid => {
-      setDisabled(valid);
+    formSchema.isValid(form).then((valid) => {
+      setDisabled(!valid);
     });
   }, [form]);
 
@@ -94,39 +114,47 @@ function Application() {
       <FormWrapper>
         <label className="apply-label">
           First Name
-          <input onChange={handleChange} />
+          <input onChange={handleChange} name="FirstName" value={FirstName} />
+          {errors.FirstName && <p className="error">{errors.FirstName}</p>}
         </label>
-        {errors.firstName.length > 0 && <p className="error">{errors.firstName}</p>}
+
         <label className="apply-label">
           Last Name
-          <input onChange={handleChange} />
+          <input onChange={handleChange} name="LastName" value={LastName} />
+
+          {errors.LastName.length > 0 && <p className="error">{errors.LastName}</p>}
         </label>
-        {errors.lastName.length > 0 && <p className="error">{errors.lastName}</p>}
         <br />
         <label className="apply-label">
           Adress
-          <input onChange={handleChange} type="text" name="adress" value={form.adress} />
+          <input onChange={handleChange} type="text" name="Address" value={Address} />
+
+          {errors.Address.length > 0 && <p className="error">{errors.Address}</p>}
         </label>
-        {errors.adress.length > 0 && <p className="error">{errors.adress}</p>}
-        <label className="apply-label" >
+        <label className="apply-label" type="text" name="email" value={Email}>
           Email
           <input onChange={handleChange} />
+
+          {errors.Email.length > 0 && <p className="error">{errors.Email}</p>}
         </label>
-        {errors.email.length > 0 && <p className="error">{errors.email}</p>}
-        <label>
+        <label className="apply-label">
           Date of Birth
-          <input onChange={handleChange} type="date" name="birthDate" value={form.birthDate} />
+          <input onChange={handleChange} type="date" name="BirthDate" value={BirthDate} />
+          {errors.BirthDate.length > 0 && <p className="error">{errors.BirthDate}</p>}
         </label>
         <br />
         <label className="apply-label">
           Phone Number
-          <input onChange={handleChange} type="tel" name="phoneNumber" value={form.phoneNumber} />
+          <input onChange={handleChange} type="tel" name="PhoneNumber" value={PhoneNumber} />
         </label>
-        <button  type="submit" disabled={disabled} onSubmit={handleSubmit} >Submit</button>
+        {errors.PhoneNumber.length > 0 && <p className="error">{errors.PhoneNumber}</p>}
+        <button type="submit" disabled={disabled} onSubmit={handleSubmit} >Submit</button>
       </FormWrapper>
     </>
+
   );
 }
+
 
 
 
